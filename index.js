@@ -15,7 +15,7 @@ io.on('connection', () => {
 });
 
 
-server.listen(3000, () => {
-    console.log('Server corriendo en puerto : 3000');
+server.listen(8080, () => {
+    console.log('Server corriendo en puerto : 8080');
 });
 
