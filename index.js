@@ -10,8 +10,12 @@ const io = require('socket.io')(server);
 app.use(express.static(__dirname + '/public'));
 
 
-io.on('connection', () => {
-    console.log('Cliente conectado')
+io.on('connection', (socket) => {
+    console.log('nueva conexion');
+    socket.emit('men', {
+        msg: 'Bienvenido al server',
+        fecha: new Date()
+    });
 });
 
 
