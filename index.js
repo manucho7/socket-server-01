@@ -1,33 +1,14 @@
+// Server Model: Contiene todo el servidor de express + socket.io configurado
+const Server = require('./models/server');
 
-const express = require('express');
-const app = express();
-
-const server = require('http').createServer(app);
-
-const io = require('socket.io')(server);
-
-//desplegar el directorio publico
-app.use(express.static(__dirname + '/public'));
+// Paquete para leer y establecer las variables de entorno
+require('dotenv').config();
 
 
-io.on('connection', (socket) => {
-    // console.log('nueva conexion');
-    // socket.emit('men', {
-    //     msg: 'Bienvenido al server',
-    //     fecha: new Date()
-    // });
+// Inicializar la instancia del server
+const server = new Server();
 
-    //Escuchar el evento
-    socket.on('mensaje-to-server', (data) =>{
-        console.log(data);
+// Ejecutar el server
+server.execute();
 
-        io.emit('mensaje-from-server', data);
-    });
-
-});
-
-
-server.listen(8080, () => {
-    console.log('Server corriendo en puerto : 8080');
-});
 
