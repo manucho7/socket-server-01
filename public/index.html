@@ -16,5 +16,13 @@
             console.log(data);
         });
 
+        setTimeout(() => {
+            socket.emit( 'mens', {
+                msg: 'cliente',
+                nombre: 'Manuchi',
+                edad: 26
+            });
+        }, 2000)
+
     </script>
 </html>

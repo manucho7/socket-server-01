@@ -16,6 +16,12 @@ io.on('connection', (socket) => {
         msg: 'Bienvenido al server',
         fecha: new Date()
     });
+
+    //Escuchar el evento
+    socket.on('mens', (data) =>{
+        console.log(data);
+    })
+
 });
 
 
