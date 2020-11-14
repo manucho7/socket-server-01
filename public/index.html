@@ -17,7 +17,7 @@
             </div>
 
             <div class="col-4">
-                <button class="btn btn-primary">
+                <button type="submit" class="btn btn-primary">
                     Enviar
                 </button>
             </div>
@@ -28,11 +28,7 @@
         <div class="col">
 
             <ul id="misMensajes" class="mt-2">
-                <li>Hola</li>
-                <li>Mundo</li>
-                <li>Mis</li>
-                <li>Mensajes</li>
-                <li>adios</li>
+
             </ul>
 
         </div>
@@ -48,12 +44,28 @@
 
         //Referencias elementos del DOM
         const formulario = document.querySelector('#miFormulario');
-        const mensajes = document.querySelector('#misMensajes')
+        const mensajes = document.querySelector('#misMensajes');
+        const txtMensaje = document.querySelector('#txtMensaje');
 
-        
-        socket.on('men', (data) => {
-            console.log(data);
+        formulario.addEventListener('submit', (ev) => {
+            ev.preventDefault();
+
+            const nuevoMensaje = txtMensaje.value;
+
+            socket.emit('mensaje-to-server', {
+                text: nuevoMensaje
+            });
+
         });
+
+        socket.on('mensaje-from-server', (data) => {
+            console.log(data);
+            mensajes.innerHTML += `<li>${data.text}</li>`;
+        });
+
+        // socket.on('men', (data) => {
+        //     console.log(data);
+        // });
 
         // setTimeout(() => {
         //     socket.emit( 'mens', {

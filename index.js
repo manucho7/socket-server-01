@@ -11,16 +11,18 @@ app.use(express.static(__dirname + '/public'));
 
 
 io.on('connection', (socket) => {
-    console.log('nueva conexion');
-    socket.emit('men', {
-        msg: 'Bienvenido al server',
-        fecha: new Date()
-    });
+    // console.log('nueva conexion');
+    // socket.emit('men', {
+    //     msg: 'Bienvenido al server',
+    //     fecha: new Date()
+    // });
 
     //Escuchar el evento
-    socket.on('mens', (data) =>{
+    socket.on('mensaje-to-server', (data) =>{
         console.log(data);
-    })
+
+        io.emit('mensaje-from-server', data);
+    });
 
 });
 
